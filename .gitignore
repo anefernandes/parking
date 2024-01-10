@@ -3,6 +3,7 @@
 .idea
 target
 *.iml
+.env
 
 # Log file
 *.log
