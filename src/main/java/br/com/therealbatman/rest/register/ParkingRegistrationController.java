@@ -1,8 +1,6 @@
-package br.com.therealbatman.rest;
+package br.com.therealbatman.rest.register;
 
-import br.com.therealbatman.domain.Employer;
 import br.com.therealbatman.domain.ParkingRegistration;
-import br.com.therealbatman.domain.Visitor;
 import br.com.therealbatman.services.ParkingService;
 import io.smallrye.common.constraint.NotNull;
 import jakarta.enterprise.context.RequestScoped;
@@ -17,9 +15,9 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @Path("/parking")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Tag(name = "1 - Parking", description = "")
+@Tag(name = "1 - Registration", description = "Registro de dados de entrada e saída de veículos")
 @RequestScoped
-public class ParkingController {
+public class ParkingRegistrationController {
 
     @Inject
     ParkingService parkingService;
@@ -27,7 +25,7 @@ public class ParkingController {
     @POST
     @Path("/entry")
     @RequestBody(required = true, content =
-            @Content(mediaType = "application/json"))
+    @Content(mediaType = "application/json"))
     public Response addEntry(ParkingRegistration parkingRegistration){
         parkingService.addEntrace(parkingRegistration);
         return Response.status(Response.Status.CREATED).build();
@@ -37,20 +35,6 @@ public class ParkingController {
     @Path("/exit")
     public Response addExit(@NotNull @HeaderParam("licensePlate") String licensePlate){
         parkingService.addExit(licensePlate);
-        return Response.status(Response.Status.CREATED).build();
-    }
-
-    @POST
-    @Path("/enroll/employer")
-    public Response addEmployer(Employer employer){
-        parkingService.enrollEmployer(employer);
-        return Response.status(Response.Status.CREATED).build();
-    }
-
-    @POST
-    @Path("/enroll/visitor")
-    public Response addVisitor(Visitor visitor){
-        parkingService.enrollVisitor(visitor);
         return Response.status(Response.Status.CREATED).build();
     }
 }

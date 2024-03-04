@@ -3,17 +3,19 @@ package br.com.therealbatman.services;
 import br.com.therealbatman.domain.Employer;
 import br.com.therealbatman.domain.ParkingRegistration;
 import br.com.therealbatman.domain.Visitor;
+import io.smallrye.common.constraint.NotNull;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
 public interface ParkingService {
     List<ParkingRegistration> listAllRegistration();
-    ParkingRegistration findByLincensePlate(String licensePlate);
-    Employer findEmployerByLicensePlate(String licensePlate);
-    Visitor findVisitorByLicensePlate(String licensePlate);
-    void enrollEmployer(Employer employer);
-    void enrollVisitor(Visitor visitor);
-    void addEntrace(ParkingRegistration parkingRegistration);
-    void addExit(String licensePlate);
+    ParkingRegistration findByLincensePlate(@NotNull String licensePlate);
+    Employer findEmployerByLicensePlate(@NotNull String licensePlate);
+    Visitor findVisitorByLicensePlate(@NotNull String licensePlate);
+    void enrollEmployer(@Valid Employer employer);
+    void enrollVisitor(@Valid Visitor visitor);
+    void addEntrace(@Valid ParkingRegistration parkingRegistration);
+    void addExit(@NotNull String licensePlate);
     Integer getAvailableParkingSpace();
 }

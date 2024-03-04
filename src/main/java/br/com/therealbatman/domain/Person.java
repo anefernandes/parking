@@ -2,9 +2,13 @@ package br.com.therealbatman.domain;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Data
-public class Person {
+public abstract class Person {
+    @CPF
+    @NotNull
+    private String id;
     private String name;
     private String email;
     @NotNull

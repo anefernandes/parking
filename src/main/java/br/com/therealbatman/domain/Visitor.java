@@ -8,7 +8,4 @@ import org.hibernate.validator.constraints.br.CPF;
 @Data
 @MongoEntity(collection= "visitor")
 public class Visitor extends Person {
-    @CPF
-    @NotNull
-    private String id;
 }
